@@ -4,8 +4,6 @@ This page contains some of the scripts I created as part of my M1 internship usi
 For the analysis of metagenomics data, DeepVirFinder, VIBRANT and VirSorter2 are required. For metatranscriptomics, only geNomad is required.
 MMseqs taxonomy need to be installed before the usage of scripts. 
 
-[WG_cropped.pdf](https://github.com/user-attachments/files/16315137/WG_cropped.pdf)
-
 Example of pre-commands to obtain results from viral prediction tools :
 ```
 nohup virsorter run -w output_repository -i assembled_fasta --min-length 3000 -j $(($(nproc) / 2 )) all &				#with conda env
@@ -13,6 +11,16 @@ nohup virsorter run -w output_repository -i assembled_fasta --min-length 3000 -j
 nohup singularity exec --bind /home ~/vibrant.sif VIBRANT_run.py -i assembled_fasta -l 3000 &				#with singularity
 
 nohup singularity exec --bind /home ~/deepvirfinder.sif  dvf.py -i assembled_fasta -l 3000 -o output_repository &	#with singularity
+```
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1582f114-4b3f-428c-877e-25d6ca066b47" />
+</p>
+
+
+- <code>**concat_pred_ARN.sh**</code><sub>  ( 1 ) </sub> : script combining viral sequence predictions from geNomad to produce fasta sequences (completes)
+```
+concat_pred_ADN.sh <_geNomad_output_dir_> <_original_fasta_>
 ```
 
 - <code>**concat_pred_ADN.sh**</code><sub>  ( 1 ) </sub> : script combining viral sequence predictions from DeepVirFinder, VirSorter2 and VIBRANT to produce fasta sequences (completes)
