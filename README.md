@@ -4,6 +4,10 @@ This page contains some of the scripts I created as part of my M1 internship usi
 For the analysis of metagenomics data, DeepVirFinder, VIBRANT and VirSorter2 are required. For metatranscriptomics, only geNomad is required.
 MMseqs taxonomy need to be installed before the usage of scripts. 
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1582f114-4b3f-428c-877e-25d6ca066b47" />
+</p>
+
 Example of pre-commands to obtain results from viral prediction tools :
 ```
 nohup virsorter run -w output_repository -i assembled_fasta --min-length 3000 -j $(($(nproc) / 2 )) all &				#with conda env
@@ -13,24 +17,23 @@ nohup singularity exec --bind /home ~/vibrant.sif VIBRANT_run.py -i assembled_fa
 nohup singularity exec --bind /home ~/deepvirfinder.sif  dvf.py -i assembled_fasta -l 3000 -o output_repository &	#with singularity
 ```
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/1582f114-4b3f-428c-877e-25d6ca066b47" />
-</p>
-
-
+### Metatranscriptomics part :
 - <code>**concat_pred_ARN.sh**</code><sub>  ( 1 ) </sub> : script combining viral sequence predictions from geNomad to produce fasta sequences (completes)
 ```
 concat_pred_ADN.sh <_geNomad_output_dir_> <_original_fasta_>
 ```
 
+### Metagenomics part :
 - <code>**concat_pred_ADN.sh**</code><sub>  ( 1 ) </sub> : script combining viral sequence predictions from DeepVirFinder, VirSorter2 and VIBRANT to produce fasta sequences (completes)
 ```
 concat_pred_ADN.sh <_VIBRANT_outpout_dir_> <_VS2_output_dir_> <_DVF_output_dir_> <_original_fasta_>
 ```
-Use CheckV for obtain fastas of proviruses and viruses (and their quality) :
+----------------------------------------------------------------------------------------------------------
+
+Next, use CheckV for obtain fastas of proviruses and viruses (and their quality) :
 ```
 # E.G.
-singularity exec --bind /home ~/checkv.sif checkv end_to_end tmp/pred_complete.fna checkV_output -t32
+singularity exec --bind /home ~/checkv.sif checkv end_to_end tmp/pred_complete.fna checkV_output -t$(($(nproc) / 2 ))
 ```
 - **creaDB_refseqv.sh**<sub> ( 0 ) </sub> : useful command for creating the RefseqViral database.
 DATABASE (absolute) path : /~/taxonomy/mmseqs_vrefseq/refseq_viral
@@ -45,9 +48,7 @@ Integrated scripts :
   
 - **contigs_plot.py**<sub> ( 2 ) </sub> : give an SVG pie plot ; proportion of viral and proviral contigs (>=3kb) in the original fasta
 
-- **matrix_quality.py**<sub> ( 2 ) </sub> : create a TSV file for the upset script : col1=ID ; col2=quality ; col3-5=presence/absence [0,1]
-
-- **upset_quality.R**<sub> ( 2 ) </sub> : give an upset plot (SVG) between each tools and the quality information of the viral sequence
+- **barplot_quality.py**<sub> ( 2 ) </sub> : give an SVG barplotplot decribing predicted contigs's quality (with checkV results) 
 
 - **script_sankey.R**<sub> ( 2 ) </sub> : this script returns sankey diagrams for taxonomy using report (KRAKEN-style) and the Pavian library with R.
   ### Depandancies 
@@ -75,8 +76,7 @@ After running concat_pred_ADN.sh and synthese.sh
 
 PLOTS :
 - **contigs_pie.svg** >>> from contigs_plot.py                                    
-- **sankey_taxo_report_[ proviruses/viruses ].[ pdf/html ]** >>> from script_sankey.R
-- **upset_[ proviruses/viruses ].svg** >>> from upset_quality.R                      
+- **sankey_taxo_report_[ proviruses/viruses ].[ pdf/html ]** >>> from script_sankey.R                  
 
 Kraken reports :
 - **taxo_report_[ proviruses/viruses ]** >>> from mmseqs taxonomyreport ( synthese.sh )
@@ -100,7 +100,7 @@ VM_Fargettes_2049	1094892	species	Megavirus chiliensis	d_Viruses;-_Varidnaviria;
 VM_Fargettes_22544	1557033	species	Yellowstone Lake virophage 5	d_Viruses;-_Varidnaviria;k_Bamfordvirae;p_Preplasmiviricota;c_Maveriviricetes;o_Priklausovirales;f_Lavidaviridae;-_unclassified Lavidaviridae;s_Yellowstone Lake virophage 5
 ```
 
-- **taxonomy_[ proviruses/viruses ].tsv** >>> from taxo_to_tsv.py
+- **taxonomy_[ proviruses/viruses ].tsv** >>> from reformat_taxo.py
 ```
 ID	Domain	Kingdom	Phylum	Class	Order	Family	Genus	Species
 VM_Fargettes_2049	Viruses	Bamfordvirae	Nucleocytoviricota	Megaviricetes	Imitervirales	Mimiviridae	Mimivirus	Megavirus chiliensis
@@ -122,13 +122,6 @@ Quality files :
 VM_Fargettes_10277	Not-determined
 VM_Fargettes_10335	Low-quality
 VM_Fargettes_10438	Medium-quality
-```
-
-- **[ viruses/proviruses ]_matrix.tsv** >>> from matrix_quality.py
-```
-ID	Quality	VIB	VS2	DVF
-VM_Fargettes_10794	Low-quality	1	1	1
-VM_Fargettes_15038	Low-quality	0	1	1
 ```
 
 FASTA :
