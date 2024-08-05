@@ -44,7 +44,7 @@ synthese.sh <_checkV_output_dir_> <_original_fasta_> <_absolute_path_to_DB_>
 ```
 Integrated scripts :
 
-- **taxo_to_tsv.py**<sub> ( 2 ) </sub> : script using output "results.tsv" of MMseqs taxonomy to give an other output TSV cleaned of the taxonomy with ids and taxonomic ranks.
+- **reformat_taxo.py**<sub> ( 2 ) </sub> : script using output "results.tsv" of MMseqs taxonomy to give an other output TSV cleaned of the taxonomy with ids and taxonomic ranks.
   
 - **contigs_plot.py**<sub> ( 2 ) </sub> : give an SVG pie plot ; proportion of viral and proviral contigs (>=3kb) in the original fasta
 
