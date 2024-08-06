@@ -66,8 +66,18 @@ Integrated scripts :
   install.packages("webshot")
   webshot::install_phantomjs()
   ```
-
-
+  - _htmlwidgets_
+  ```
+  #https://github.com/ramnathv/htmlwidgets
+  devtools::install_github('ramnathv/htmlwidgets')
+  # or
+  install.packages("htmlwidgets")
+  ```
+  Others python scripts use the following packages :
+    - _seaborn_
+    - _matplotlib.pyplot_
+    - _pandas_
+  
 # Outputs 
 
 After running concat_pred_ADN.sh and synthese.sh 
@@ -75,8 +85,23 @@ After running concat_pred_ADN.sh and synthese.sh
 ### res/ :
 
 PLOTS :
-- **contigs_pie.svg** >>> from contigs_plot.py                                    
+- **contigs_pie.svg** >>> from contigs_plot.py
+
+ <p align="left">
+  <img src="https://github.com/user-attachments/assets/685be90f-0114-4068-b250-f916fff52824" width=300 height=300/>
+</p>
+
+- **[_proviruses/viruses_]_quality_plot.svg** >>> from barplot_quality.py
+
+ <p align="left">
+  <img src="https://github.com/user-attachments/assets/460b3b3c-b6f7-447e-8be3-af071df5244a" width=300 height=300/>
+</p>
+
 - **sankey_taxo_report_[ proviruses/viruses ].[ pdf/html ]** >>> from script_sankey.R                  
+
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/aef00ed1-1ee2-4304-8c38-8c3062fbd7cf"/>
+</p>
 
 Kraken reports :
 - **taxo_report_[ proviruses/viruses ]** >>> from mmseqs taxonomyreport ( synthese.sh )
