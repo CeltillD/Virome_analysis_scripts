@@ -5,7 +5,7 @@ For the analysis of metagenomics data, DeepVirFinder, VIBRANT and VirSorter2 are
 MMseqs taxonomy need to be installed before the usage of scripts. 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/1582f114-4b3f-428c-877e-25d6ca066b47" />
+  <img src="https://github.com/user-attachments/assets/9f1397e5-e8ad-4661-8f9b-ff121eda7740" />
 </p>
 
 Example of pre-commands to obtain results from viral prediction tools :
@@ -88,19 +88,19 @@ PLOTS :
 - **contigs_pie.svg** >>> from contigs_plot.py
 
  <p align="left">
-  <img src="https://github.com/user-attachments/assets/685be90f-0114-4068-b250-f916fff52824" width=300 height=300/>
+  <img src="https://github.com/user-attachments/assets/0f1e0adf-e932-4723-bccd-ca2911487e90" width=300 height=300/>
 </p>
 
 - **[_proviruses/viruses_]_quality_plot.svg** >>> from barplot_quality.py
 
  <p align="left">
-  <img src="https://github.com/user-attachments/assets/460b3b3c-b6f7-447e-8be3-af071df5244a" width=300 height=300/>
+  <img src="https://github.com/user-attachments/assets/a94dbeb9-a430-4fc4-8a38-fb360d675b8e" width=300 height=300/>
 </p>
 
 - **sankey_taxo_report_[ proviruses/viruses ].[ pdf/html ]** >>> from script_sankey.R                  
 
 <p align="left">
-  <img src="https://github.com/user-attachments/assets/aef00ed1-1ee2-4304-8c38-8c3062fbd7cf"/>
+  <img src="https://github.com/user-attachments/assets/e262447f-5e12-4dce-a730-6094a738628b"/>
 </p>
 
 Kraken reports :
